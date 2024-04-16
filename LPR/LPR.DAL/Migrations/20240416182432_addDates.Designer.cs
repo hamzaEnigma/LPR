@@ -4,6 +4,7 @@ using LPR.DAL.CoreDB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LPR.DAL.Migrations
 {
     [DbContext(typeof(LrpContext))]
-    partial class LrpContextModelSnapshot : ModelSnapshot
+    [Migration("20240416182432_addDates")]
+    partial class addDates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,7 +46,7 @@ namespace LPR.DAL.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("dat_Label");
 
-                    b.Property<Guid>("ProfesionnalId")
+                    b.Property<Guid?>("ProfesionnalId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("dat_fk_Profesionnal");
 
@@ -104,9 +107,7 @@ namespace LPR.DAL.Migrations
                 {
                     b.HasOne("LPR.DAL.Entities.Professional", "Professional")
                         .WithMany()
-                        .HasForeignKey("ProfesionnalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProfesionnalId");
 
                     b.Navigation("Professional");
                 });

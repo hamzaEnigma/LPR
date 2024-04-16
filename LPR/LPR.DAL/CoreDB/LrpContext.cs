@@ -8,6 +8,7 @@ namespace LPR.DAL.CoreDB
         public LrpContext(DbContextOptions options) : base(options) { }
 
         public DbSet<Professional> Profesionnals { get; set; }
-
+        public DbSet<DateAvailability> DateAvailabilities { get; set; }
+        
     }
 }
