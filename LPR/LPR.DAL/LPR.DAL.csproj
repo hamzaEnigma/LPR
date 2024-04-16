@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\CommonEntities\" />
     <Folder Include="Repositories\Generic\" />
   </ItemGroup>
 
