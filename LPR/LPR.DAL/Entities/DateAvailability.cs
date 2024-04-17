@@ -1,11 +1,6 @@
 ﻿using LPR.DAL.Entities.CommonEntities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LPR.DAL.Entities
 {
@@ -26,6 +21,7 @@ namespace LPR.DAL.Entities
 
         [ForeignKey(nameof(ProfesionnalId))]
         public virtual Professional? Professional { get; set; }
+        public virtual List<HourAvailability>? HoursAvailabilities { get; set; }
 
     }
 }
