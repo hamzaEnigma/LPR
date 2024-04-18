@@ -1,6 +1,8 @@
 using LPR.DAL.CoreDB;
 using LPR.DAL.Interfaces.IRepositories;
 using LPR.DAL.Repositories;
+using LPR.Service.IServices;
+using LPR.Service.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -14,6 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<LrpContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("myDb1")));
 builder.Services.AddScoped<IProfesionnalRepository, ProfesionnalRepository>();
+builder.Services.AddScoped<IProfesionnalService, ProfesionnalService>();
 
 var app = builder.Build();
 

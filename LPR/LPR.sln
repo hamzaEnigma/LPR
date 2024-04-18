@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LPR.API", "LPR\LPR.API.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LPR.DAL", "LPR.DAL\LPR.DAL.csproj", "{BA00C0DD-2395-49CC-9C19-A28B1A81D449}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LPR.Service", "LPR.Service\LPR.Service.csproj", "{7DD84CB5-B936-4271-B28A-BE5EDD50160A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BA00C0DD-2395-49CC-9C19-A28B1A81D449}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA00C0DD-2395-49CC-9C19-A28B1A81D449}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA00C0DD-2395-49CC-9C19-A28B1A81D449}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DD84CB5-B936-4271-B28A-BE5EDD50160A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DD84CB5-B936-4271-B28A-BE5EDD50160A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DD84CB5-B936-4271-B28A-BE5EDD50160A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DD84CB5-B936-4271-B28A-BE5EDD50160A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

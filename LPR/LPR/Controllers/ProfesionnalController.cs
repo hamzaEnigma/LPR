@@ -1,5 +1,7 @@
 ﻿using LPR.DAL.Entities;
 using LPR.DAL.Interfaces.IRepositories;
+using LPR.Service.DTO;
+using LPR.Service.IServices;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -10,39 +12,40 @@ namespace LPR.API.Controllers
     [ApiController]
     public class ProfesionnalController : ControllerBase
     {
-        private readonly IProfesionnalRepository profesionnalRepository;
+        private readonly IProfesionnalService profesionnalService;
 
-        public ProfesionnalController(IProfesionnalRepository profesionnalRepository)
+        public ProfesionnalController(IProfesionnalService profesionnalService)
         {
-            this.profesionnalRepository = profesionnalRepository;
-        }
-        // GET: api/<ProfesionnalController>
-        [HttpGet]
-        public IEnumerable<Professional> Get()
-        {
-            return profesionnalRepository.GetAll();
+            this.profesionnalService = profesionnalService;
         }
 
-        // GET api/<ProfesionnalController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<ProfesionnalController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] ProfesionnalDTO profesionnal)
         {
+            this.profesionnalService.AddProfesionnal(profesionnal);
         }
 
-        // PUT api/<ProfesionnalController>/5
+        [HttpGet]
+        [Route("GetAll")]
+        public List<ProfesionnalDTO> GetAll()
+        {
+            return profesionnalService.GetAll();
+        }
+
+        [HttpGet("{id}")]
+
+        public ProfesionnalDTO Get(Guid id)
+        {
+            return profesionnalService.GetProfesionnalById(id);
+        }
+
+
+
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<ProfesionnalController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LPR.DAL\LPR.DAL.csproj" />
+    <ProjectReference Include="..\LPR.Service\LPR.Service.csproj" />
   </ItemGroup>
 
 </Project>
