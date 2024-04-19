@@ -36,7 +36,6 @@ namespace LPR.Service.Services
                     Id = x.Id,
                     Label = x.Label,
                     RealDate = x.RealDate,
-
                 });
             });
             return listDates;

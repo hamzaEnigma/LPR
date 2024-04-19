@@ -19,6 +19,8 @@ builder.Services.AddScoped<IProfesionnalRepository, ProfesionnalRepository>();
 builder.Services.AddScoped<IProfesionnalService, ProfesionnalService>();
 builder.Services.AddScoped<IDateRepository, DateRepository>();
 builder.Services.AddScoped<IDateService, DateService>();
+builder.Services.AddScoped<IHourRepository, HourRepository>();
+builder.Services.AddScoped<IHourService, HourService>();
 
 var app = builder.Build();
 
