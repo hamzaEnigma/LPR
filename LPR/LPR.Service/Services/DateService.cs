@@ -33,7 +33,7 @@ namespace LPR.Service.Services
             {
                 listDates.Add(new DateDTO()
                 {
-                    Id = x.Id,
+                    IdDate = x.Id,
                     Label = x.Label,
                     RealDate = x.RealDate,
                 });

@@ -3,6 +3,7 @@ using LPR.DAL.CoreDB;
 using LPR.DAL.Entities;
 using LPR.DAL.Interfaces.IRepositories;
 using LPR.DAL.Repositories.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace LPR.DAL.Repositories
 {
@@ -19,12 +20,23 @@ namespace LPR.DAL.Repositories
             dbContext.Add(date);
             dbContext.SaveChanges();
         }
-        public List<DateAvailability> getDatesByProfesionnalId(Guid profesionnalId)
+        public List<DateAvailability> getDatesByProfesionnalId(Guid profesionnalId, Boolean include = false)
         {
-            return  dbContext.DateAvailabilities
-                    .Where(x=>x.ProfesionnalId == profesionnalId && x.IsDeleted == false)
-                    .ToList();
+            if (include != true)
+            {
+                return dbContext.DateAvailabilities
+                .Where(x => x.ProfesionnalId == profesionnalId && x.IsDeleted == false)
+                .ToList();
+            }
+            else
+            {
+                return dbContext.DateAvailabilities
+                .Where(x => x.ProfesionnalId == profesionnalId && x.IsDeleted == false)
+                .Include(x => x.HoursAvailabilities)
+                .ToList();
+            }
         }
-
     }
+
 }
+

@@ -39,7 +39,12 @@ namespace LPR.API.Controllers
             return profesionnalService.GetProfesionnalById(id);
         }
 
-
+        [HttpGet]
+        [Route("ProfesionnalAvailability/{id}")]
+        public List<DateDTO> ProfesionnalAvailability(Guid id)
+        {
+            return profesionnalService.getProfesionnalAvailability(id);
+        }
 
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
