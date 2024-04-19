@@ -26,5 +26,20 @@ namespace LPR.Service.Services
                 });
             });
         }
+        public List<DateDTO> getDateAvailabilityByProfesionnalId(Guid profesionnalId)
+        {
+            var listDates = new List<DateDTO>();
+            dateRepository.getDatesByProfesionnalId(profesionnalId).ForEach(x =>
+            {
+                listDates.Add(new DateDTO()
+                {
+                    Id = x.Id,
+                    Label = x.Label,
+                    RealDate = x.RealDate,
+
+                });
+            });
+            return listDates;
+        }
     }
 }

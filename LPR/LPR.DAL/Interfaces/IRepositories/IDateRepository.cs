@@ -6,5 +6,6 @@ namespace LPR.DAL.Interfaces.IRepositories
     public interface IDateRepository : IGenericRepository<DateAvailability>
     {
         void AddDateByProfesionnalId(Guid profesionnalId, DateAvailability date);
+        List<DateAvailability> getDatesByProfesionnalId(Guid profesionnalId);
     }
 }

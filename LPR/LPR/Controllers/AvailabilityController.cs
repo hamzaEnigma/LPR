@@ -24,10 +24,10 @@ namespace LPR.API.Controllers
             return new string[] { "value1", "value2" };
         }
         [HttpGet]
-        [Route("GetByProfesionnalId/{id}")]
-        public string GetByProfesionnalId(Guid id)
+        [Route("GetAvailabilityByProfesionnalId/{id}")]
+        public List<DateDTO> GetAvailabilityByProfesionnalId(Guid id)
         {
-            return "value";
+            return dateService.getDateAvailabilityByProfesionnalId(id);
         }
 
         // POST api/<AvailabilityController>

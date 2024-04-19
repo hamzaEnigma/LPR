@@ -19,6 +19,12 @@ namespace LPR.DAL.Repositories
             dbContext.Add(date);
             dbContext.SaveChanges();
         }
+        public List<DateAvailability> getDatesByProfesionnalId(Guid profesionnalId)
+        {
+            return  dbContext.DateAvailabilities
+                    .Where(x=>x.ProfesionnalId == profesionnalId && x.IsDeleted == false)
+                    .ToList();
+        }
 
     }
 }
