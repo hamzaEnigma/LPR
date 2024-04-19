@@ -17,6 +17,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<LrpContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("myDb1")));
 builder.Services.AddScoped<IProfesionnalRepository, ProfesionnalRepository>();
 builder.Services.AddScoped<IProfesionnalService, ProfesionnalService>();
+builder.Services.AddScoped<IDateRepository, DateRepository>();
+builder.Services.AddScoped<IDateService, DateService>();
 
 var app = builder.Build();
 
