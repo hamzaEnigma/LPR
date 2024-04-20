@@ -16,7 +16,7 @@ namespace LPR.DAL.Entities
 
         [Column("pro_gender")]
         public string? gender { get; set; }
-        public virtual List<DateAvailability>? DateAvailabilities { get; set; }
+        public virtual List<DateAvailability>? DateAvailabilities { get; set; } = new List<DateAvailability>();
 
     }
 }

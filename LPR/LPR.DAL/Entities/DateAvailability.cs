@@ -21,7 +21,7 @@ namespace LPR.DAL.Entities
 
         [ForeignKey(nameof(ProfesionnalId))]
         public virtual Professional? Professional { get; set; }
-        public virtual List<HourAvailability>? HoursAvailabilities { get; set; }
+        public virtual List<HourAvailability>? HoursAvailabilities { get; set; } = new List<HourAvailability> { };
 
     }
 }
