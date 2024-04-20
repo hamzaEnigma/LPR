@@ -8,11 +8,11 @@ namespace LPR.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AvailabilityController : ControllerBase
+    public class DayAvailabilityController : ControllerBase
     {
         private readonly IDateService dateService;
 
-        public AvailabilityController(IDateService dateService)
+        public DayAvailabilityController(IDateService dateService)
         {
             this.dateService = dateService;
         }
@@ -32,7 +32,8 @@ namespace LPR.API.Controllers
 
         // POST api/<AvailabilityController>
         [HttpPost]
-        public IActionResult Post([FromBody] ProfesionnalAvailabilityDatesDTO profesionnalAvailabilityDatesDTO)
+        [Route("AddDateAvailability/{id}")]
+        public IActionResult Post(Guid id,[FromBody] ProfesionnalAvailabilityDatesDTO profesionnalAvailabilityDatesDTO)
         {
             dateService.addDateAvailability(profesionnalAvailabilityDatesDTO);
             return Ok();

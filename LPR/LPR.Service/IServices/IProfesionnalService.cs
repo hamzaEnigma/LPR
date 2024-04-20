@@ -8,6 +8,7 @@ namespace LPR.Service.IServices
         List<ProfesionnalDTO>? GetAll();
         ProfesionnalDTO? GetProfesionnalById(Guid id);
         List<DateDTO> getProfesionnalAvailability(Guid id);
+        void AddProfesionnalAvailability(Guid idProfesionnal, List<SetOrAddDateDTO> profesionnalAvailability);
 
     }
 }

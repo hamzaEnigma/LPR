@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LPR.Service.DTO
 {
-    public class HourDTO
+    public class HourDTO 
     {
         public Guid Id { get; set; }
         public required string Label { get; set; }

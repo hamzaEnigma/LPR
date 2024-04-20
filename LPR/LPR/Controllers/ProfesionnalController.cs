@@ -13,12 +13,20 @@ namespace LPR.API.Controllers
     public class ProfesionnalController : ControllerBase
     {
         private readonly IProfesionnalService profesionnalService;
+        private readonly IDateService dateService;
 
-        public ProfesionnalController(IProfesionnalService profesionnalService)
+        public ProfesionnalController(IProfesionnalService profesionnalService,IDateService dateService)
         {
             this.profesionnalService = profesionnalService;
+            this.dateService = dateService;
         }
 
+        [HttpPost]
+        [Route("AddAvailability/{idProfesionnal}")]
+        public void AddAvailability(Guid idProfesionnal, [FromBody] List<SetOrAddDateDTO> profesionnalAvailabilityDatesDTO)
+        {
+            profesionnalService.AddProfesionnalAvailability(idProfesionnal, profesionnalAvailabilityDatesDTO);
+        }
         [HttpPost]
         public void Post([FromBody] ProfesionnalDTO profesionnal)
         {

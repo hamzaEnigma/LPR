@@ -10,11 +10,20 @@ namespace LPR.Service.Services
         private readonly IProfesionnalRepository profesionnalRepository;
         private readonly IDateRepository dateRepository;
 
-        public ProfesionnalService(IProfesionnalRepository profesionnalRepository,IDateRepository dateRepository)
+        public ProfesionnalService(IProfesionnalRepository profesionnalRepository, IDateRepository dateRepository)
         {
             this.profesionnalRepository = profesionnalRepository;
             this.dateRepository = dateRepository;
         }
+        public void AddProfesionnalAvailability(Guid idProfesionnal, List<SetOrAddDateDTO> profesionnalAvailability)
+        {
+            profesionnalAvailability.ForEach(x =>
+            {
+                DateAvailability dateEntity = ToDateSetOrAddDtoMap(x);
+                dateRepository.AddDateByProfesionnalId(idProfesionnal, dateEntity);
+            });
+        }
+
         public void AddProfesionnal(ProfesionnalDTO profesionnalDTO)
         {
             var ProfesionnalEntity = new Professional()
@@ -44,26 +53,50 @@ namespace LPR.Service.Services
         public ProfesionnalDTO? GetProfesionnalById(Guid id)
         {
             var profesionnal = profesionnalRepository.GetSingleNonTrackingBy(x => x.Id == id && x.IsDeleted == false);
-                return new ProfesionnalDTO
-                {
-                    Id = profesionnal.Id,
-                    FirstName = profesionnal.FirstName,
-                    gender = profesionnal.gender,
-                };
+            return new ProfesionnalDTO
+            {
+                Id = profesionnal.Id,
+                FirstName = profesionnal.FirstName,
+                gender = profesionnal.gender,
+            };
         }
         public List<DateDTO> getProfesionnalAvailability(Guid id)
         {
-            var pro =  profesionnalRepository.GetSingleBy(x=>x.Id == id).Result;
-            var proDates = dateRepository.getDatesByProfesionnalId(id,true);
+            var pro = profesionnalRepository.GetSingleBy(x => x.Id == id).Result;
+            var proDates = dateRepository.getDatesByProfesionnalId(id, true);
             var result = ToListDateDTOMap(proDates);
             return result;
-
         }
-
-        private GetProfesionnalAvailabilityDTO? MapProfesionnalAvailability(Professional pro, List<DateAvailability> datesEntities)
+        public static DateAvailability ToDateSetOrAddDtoMap(SetOrAddDateDTO profesionnalAvailability)
         {
-            return null;
+            var dateToAdd =  new DateAvailability()
+            {
+                Id = new Guid(),
+                Label = profesionnalAvailability.Label,
+                RealDate = DateTime.Now,
+            };
+            dateToAdd.HoursAvailabilities = ToListHourSetOrAddDTOMap(dateToAdd.Id, profesionnalAvailability.HoursDto);
+            return dateToAdd;
         }
+        public static HourAvailability ToHourSetOrAddDTOMap(Guid dateId,SetOrAddHourDTO hourDto)
+        {
+            return new HourAvailability()
+            {
+                Id = new Guid(),
+                Label = hourDto.Label,
+                DateId = dateId,
+            };
+        }
+        public static List<HourAvailability> ToListHourSetOrAddDTOMap(Guid dateId, List<SetOrAddHourDTO> listHourDto)
+        {
+            var resultList = new List<HourAvailability>();
+            listHourDto.ForEach(x =>
+            {
+                resultList.Add(ToHourSetOrAddDTOMap(dateId, x));
+            });
+            return resultList;
+        }
+
         public static HourDTO ToHourDTOMap(HourAvailability hourEntity)
         {
             return new HourDTO()
@@ -99,5 +132,7 @@ namespace LPR.Service.Services
             });
             return list;
         }
+
+
     }
 }
