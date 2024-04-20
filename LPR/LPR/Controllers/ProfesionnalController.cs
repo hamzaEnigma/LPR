@@ -49,7 +49,7 @@ namespace LPR.API.Controllers
 
         [HttpGet]
         [Route("ProfesionnalAvailability/{id}")]
-        public List<DateDTO> ProfesionnalAvailability(Guid id)
+        public List<GetDateDTO> ProfesionnalAvailability(Guid id)
         {
             return profesionnalService.getProfesionnalAvailability(id);
         }

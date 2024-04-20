@@ -60,12 +60,32 @@ namespace LPR.Service.Services
                 gender = profesionnal.gender,
             };
         }
-        public List<DateDTO> getProfesionnalAvailability(Guid id)
+        public List<GetDateDTO> getProfesionnalAvailability(Guid id)
         {
             var pro = profesionnalRepository.GetSingleBy(x => x.Id == id).Result;
             var proDates = dateRepository.getDatesByProfesionnalId(id, true);
-            var result = ToListDateDTOMap(proDates);
+            var datesDto = ToListDateDTOMap(proDates);
+            List<GetDateDTO> datesToShow = ToGetDatesDtoMap(datesDto);
+            return datesToShow;
+        }
+        public static List<GetDateDTO> ToGetDatesDtoMap(List<DateDTO> datesDto)
+        {
+            
+            var result = new List<GetDateDTO>();
+            datesDto.ForEach(x =>
+            {
+                result.Add(ToGetDatesDtoMap(x));
+            });
             return result;
+        }
+        public static GetDateDTO ToGetDatesDtoMap(DateDTO dateDto)
+        {
+            return new GetDateDTO()
+            {
+                IdDate = dateDto.IdDate,
+                LabelDate = dateDto.Label,
+                HoursDto = dateDto.HoursDto
+            };
         }
         public static DateAvailability ToDateSetOrAddDtoMap(SetOrAddDateDTO profesionnalAvailability)
         {
