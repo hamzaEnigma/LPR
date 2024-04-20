@@ -10,8 +10,9 @@ namespace LPR.DAL.Entities.CommonEntities
     {
         public bool? IsDeleted { get; set; } = false;
         public virtual Guid? CreatedBy { get; set; }
+        public virtual string? CreatedByUserName { get; set; } = "Admin";
         public Guid? UpdatedBy { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; } = DateTime.Now;
         public DateTime? UpdatedDate { get; set; }
     }
 }
