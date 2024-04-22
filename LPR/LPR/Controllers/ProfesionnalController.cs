@@ -23,9 +23,10 @@ namespace LPR.API.Controllers
 
         [HttpPost]
         [Route("AddAvailability/{idProfesionnal}")]
-        public void AddAvailability(Guid idProfesionnal, [FromBody] List<SetOrAddDateDTO> profesionnalAvailabilityDatesDTO)
+        public string AddAvailability(Guid idProfesionnal, [FromBody] List<SetOrAddDateDTO> profesionnalAvailabilityDatesDTO)
         {
-            profesionnalService.AddProfesionnalAvailability(idProfesionnal, profesionnalAvailabilityDatesDTO);
+            var result = profesionnalService.AddProfesionnalAvailability(idProfesionnal, profesionnalAvailabilityDatesDTO);
+            return result == "Ok" ? "Succes" : "Il y a déja un rdv reservé!";
         }
         [HttpPost]
         public void Post([FromBody] ProfesionnalDTO profesionnal)

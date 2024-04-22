@@ -15,13 +15,19 @@ namespace LPR.Service.Services
             this.profesionnalRepository = profesionnalRepository;
             this.dateRepository = dateRepository;
         }
-        public void AddProfesionnalAvailability(Guid idProfesionnal, List<SetOrAddDateDTO> profesionnalAvailability)
+        public string AddProfesionnalAvailability(Guid idProfesionnal, List<SetOrAddDateDTO> profesionnalAvailability)
         {
+            var result = "NotOk";
             profesionnalAvailability.ForEach(x =>
             {
                 DateAvailability dateEntity = ToDateSetOrAddDtoMap(x);
-                dateRepository.AddDateByProfesionnalId(idProfesionnal, dateEntity);
+                if (CheckAvailabilityExists(idProfesionnal, profesionnalAvailability) == false)
+                {
+                    dateRepository.AddDateByProfesionnalId(idProfesionnal, dateEntity);
+                    result = "Ok";
+                }
             });
+            return result;
         }
 
         public void AddProfesionnal(ProfesionnalDTO profesionnalDTO)
@@ -67,6 +73,28 @@ namespace LPR.Service.Services
             var datesDto = ToListDateDTOMap(proDates);
             List<GetDateDTO> datesToShow = ToGetDatesDtoMap(datesDto);
             return datesToShow;
+        }
+        public bool CheckAvailabilityExists(Guid idProfesionnal, List<SetOrAddDateDTO> profesionnalAvailabilityDatesDTO)
+        {
+            var exists = false;
+            var datesReserved = dateRepository.getDatesByProfesionnalId(idProfesionnal,true);
+            profesionnalAvailabilityDatesDTO.ForEach(x =>
+            {
+                var dateReserved = datesReserved.Where(y => y.Label == x.Label).FirstOrDefault();
+                if (dateReserved != null)
+                {
+                    x.HoursDto?.ForEach(h =>
+                    {
+                        if (dateReserved?.HoursAvailabilities?.Any(z => z.Label == h.Label) == true)
+                        {
+                            exists = true;
+                            return;
+                        }
+                    });
+                }
+
+            });
+            return exists;
         }
         public static List<GetDateDTO> ToGetDatesDtoMap(List<DateDTO> datesDto)
         {

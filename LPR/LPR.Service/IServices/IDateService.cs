@@ -6,6 +6,7 @@ namespace LPR.Service.IServices
     {
         void addDateAvailability(ProfesionnalAvailabilityDatesDTO profesionnalAvailability);
         List<DateDTO> getDateAvailabilityByProfesionnalId(Guid profesionnalId);
+        //bool checkDateAvailability(Guid Id);
 
     }
 }
